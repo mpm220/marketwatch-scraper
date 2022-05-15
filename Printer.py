@@ -1,12 +1,18 @@
 import csv
 import os
+from datetime import datetime
 
 
-def write_val(values):
+def writeToCSV(schema):
+    date = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
     if not os.path.isfile('Stock_values.csv'):
-        with open('Stock_values.csv', 'w') as csv_file:
+        with open('stock_values.csv', 'w') as csv_file:
             writer = csv.writer(csv_file)
-            writer.writerow(["Dutch Shell", "AJ Bell", "Gamestop", "United Utilities", "Date/Time"])
+            headers = [company["name"] for company in schema]
+            headers.append('Date/Time')
+            writer.writerow(headers)
     with open('Stock_values.csv', 'a') as csv_file:
         writer = csv.writer(csv_file)
-        writer.writerow(x for x in values)
+        values = [company["value"] for company in schema]
+        values.append(date)
+        writer.writerow(values)
