@@ -1,10 +1,8 @@
 import Scraper
 import Printer
-import csv
-import os
-import requests
 import time
 import Companies
+import pandas as pd
 
 
 def scrapeLoop(schema):
@@ -23,6 +21,7 @@ def scrapeLoop(schema):
 
 if __name__ == "__main__":
     scrapeLoop(Companies.COMPANY_SCHEMAS)
+    
 
 
 
